@@ -25,4 +25,8 @@ export class LoginPage {
     await this.passwordField.fill(password);
     await this.loginBtn.click();
   }
+
+  public getLoginUrl(): string {
+    return this.loginUrl;
+  }
 }

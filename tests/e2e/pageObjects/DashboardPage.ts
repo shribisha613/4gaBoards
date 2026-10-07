@@ -6,10 +6,6 @@ export class DashboardPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.dashboardTitle = this.page.locator('div[title="Dashboard"]');
-  }
-
-  public async getDashboardTitle(): Promise<string | null> {
-    return this.dashboardTitle.textContent();
+    this.dashboardTitle = this.page.getByText('Dashboard', { exact: true });
   }
 }
