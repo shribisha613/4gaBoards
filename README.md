@@ -86,7 +86,8 @@ Edit `POSTGRES_PASSWORD` and `DATABASE_URL` replacing `notpassword` with randoml
 docker compose up -d
 ```
 
-Default 4ga Boards url: http://localhost:3000 \
+Default 4ga Boards url: http://locanit.defaultbranch=main
+
 Default user: `demo`\
 Default password: `demo`
 
