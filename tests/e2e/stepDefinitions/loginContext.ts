@@ -1,12 +1,16 @@
 import { Given, When } from '@cucumber/cucumber';
 import { LoginPage } from '../pageObjects/LoginPage';
+import { expect, Page } from '@playwright/test';
 
-Given('{string} has navigated to the login page', async function (_user: string) {
+async function login(this: { page: Page }, identifier: string, password: string): Promise<void> {
+  await new LoginPage(this.page).login(identifier, password);
+}
+
+Given('the user has navigated to the login page', async function (): Promise<void> {
   const loginPage = new LoginPage(this.page);
-  await loginPage.navigateToLoginPage();
+  await loginPage.navigate();
+  await expect(loginPage.getIdentifierField()).toBeVisible();
 });
 
-When('{string} logs in with email {string} and password {string}', async function (_user: string, email: string, password: string) {
-  const loginPage = new LoginPage(this.page);
-  await loginPage.login(email, password);
-});
+When('the user logs in with {string} and {string}', login);
+When('the user logs in with email {string} and password {string}', login);

@@ -3,10 +3,10 @@ import { expect } from '@playwright/test';
 import { LoginPage } from '../pageObjects/LoginPage';
 import { SessionPage } from '../pageObjects/SessionPage';
 
-Given('{string} has logged out', async function (_user: string) {
+Given('the user has logged out', async function (): Promise<void> {
   const sessionPage = new SessionPage(this.page);
   await sessionPage.logOut();
   const loginPage = new LoginPage(this.page);
-  const loginUrl = loginPage.getLoginUrl();
+  const loginUrl = loginPage.getUrl();
   await expect(this.page).toHaveURL(loginUrl);
 });
