@@ -18,7 +18,7 @@ Then('the user should be navigated to the dashboard page', async function () {
   await expect(dashboardPage.dashboardTitle).toHaveText('Dashboard');
 });
 
-Given('{string} has been registered with email {string} and password {string}', async function (_user: string, email: string, password: string) {
+Given('the user has registered with email {string} and password {string}', async function (email: string, password: string): Promise<void> {
   const registerPage = new RegisterPage(this.page);
   await registerPage.navigateToRegistrationPage();
   await registerPage.registerUser(email, password);
