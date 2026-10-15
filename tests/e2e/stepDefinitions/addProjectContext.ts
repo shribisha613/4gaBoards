@@ -3,10 +3,10 @@ import { DashboardPage } from "../pageObjects/DashboardPage";
 import { expect } from "@playwright/test";
 import { LoginPage } from "../pageObjects/LoginPage";
 
-Given("the user with email {string} and password {string} has logged in to the dashboard", async function(email: string, pass: string) {
+Given("the user with email {string} and password {string} has logged in to the dashboard", async function(email: string, password: string) {
   const loginPage = new LoginPage(this.page);
   await loginPage.navigateToLoginPage();
-  await loginPage.login(email, pass);
+  await loginPage.login(email, password);
 })
 
 When("the user creates a project with name {string}", async function(title: string) {
