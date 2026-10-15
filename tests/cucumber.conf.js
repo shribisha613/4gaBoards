@@ -1,17 +1,17 @@
 const { Before, BeforeAll, AfterAll, After, setDefaultTimeout, Status } = require('@cucumber/cucumber');
-const { chromium } = require('playwright');
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const { chromium } = require('playwright');
 require('dotenv').config();
 
-setDefaultTimeout(30000);
+setDefaultTimeout(40000);
 
 let browser;
 
 BeforeAll(async function () {
   browser = await chromium.launch({
     headless: process.env.HEADLESS === 'true',
-    slowMo: process.env.HEADLESS === 'true' ? 0 : 1000,
+    slowMo: 1000,
   });
 });
 
@@ -31,14 +31,9 @@ After(async function (scenario) {
       const resultsDir = path.join(process.cwd(), 'test-results');
 
       await fs.mkdir(resultsDir, { recursive: true });
-      const safeName = scenario.pickle.name
-        .replace(/[^a-z0-9_-]/gi, '_')
-        .slice(0, 100);
+      const safeName = scenario.pickle.name.replace(/[^a-z0-9_-]/gi, '_').slice(0, 100);
 
-      const screenshotPath = path.join(
-        resultsDir,
-        `${safeName}-${Date.now()}.png`,
-      );
+      const screenshotPath = path.join(resultsDir, `${safeName}-${Date.now()}.png`);
 
       await this.page.screenshot({
         path: screenshotPath,

@@ -21,11 +21,8 @@ export class DashboardPage {
     return this.dashboardTitle.textContent();
   }
 
-  public async openAddProjectPopup(): Promise<void> {
-    await this.dashboardAddProjectBtn.click();
-  }
-
   public async createProject(name: string): Promise<void> {
+    await this.dashboardAddProjectBtn.click();
     await this.addProjectNameField.fill(name);
     await this.addProjectBtn.click();
   }
