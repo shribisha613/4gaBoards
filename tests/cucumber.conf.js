@@ -1,5 +1,6 @@
 const { Before, BeforeAll, AfterAll, After, setDefaultTimeout } = require('@cucumber/cucumber');
 const { chromium } = require('playwright');
+require('dotenv').config();
 
 setDefaultTimeout(30000);
 
@@ -7,7 +8,7 @@ let browser;
 
 BeforeAll(async function () {
   browser = await chromium.launch({
-    headless: false,
+    headless: process.env.HEADLESS === 'true',
     slowMo: 1000,
   });
 });
