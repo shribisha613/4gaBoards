@@ -3,7 +3,7 @@ import { BASE_URL } from '../../utils/constants';
 
 export class LoginPage {
   private readonly page: Page;
-  private readonly identifierField: Locator;
+  private readonly emailField: Locator;
   private readonly passwordField: Locator;
   private readonly loginBtn: Locator;
   private readonly url: string;
@@ -11,7 +11,7 @@ export class LoginPage {
   constructor(page: Page) {
     this.page = page;
     this.url = `${BASE_URL}/login`;
-    this.identifierField = this.page.locator('input[name="emailOrUsername"]');
+    this.emailField = this.page.locator('input[name="emailOrUsername"]');
     this.passwordField = this.page.locator('input[name="password"]');
     this.loginBtn = this.page.getByRole('button', { name: 'Log in' });
   }
@@ -20,8 +20,8 @@ export class LoginPage {
     await this.page.goto(this.url);
   }
 
-  public async login(identifier: string, password: string): Promise<void> {
-    await this.identifierField.fill(identifier);
+  public async login(email: string, password: string): Promise<void> {
+    await this.emailField.fill(email);
     await this.passwordField.fill(password);
     await this.loginBtn.click();
   }
@@ -30,7 +30,7 @@ export class LoginPage {
     return this.url;
   }
 
-  public getIdentifierField(): Locator {
-    return this.identifierField;
+  public getEmailField(): Locator {
+    return this.emailField;
   }
 }

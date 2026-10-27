@@ -1,16 +1,24 @@
 import { Given, When } from '@cucumber/cucumber';
+import { Page } from '@playwright/test';
 import { LoginPage } from '../pageObjects/LoginPage';
-import { expect, Page } from '@playwright/test';
+import { DashboardPage } from '../pageObjects/DashboardPage';
+import { verifyPageLoaded } from '../helpers/pageLoadAssertions';
 
-async function login(this: { page: Page }, identifier: string, password: string): Promise<void> {
-  await new LoginPage(this.page).login(identifier, password);
-}
-
-Given('the user has navigated to the login page', async function (): Promise<void> {
+Given('the user has navigated to the login page', async function (this: { page: Page }): Promise<void> {
   const loginPage = new LoginPage(this.page);
   await loginPage.navigate();
-  await expect(loginPage.getIdentifierField()).toBeVisible();
+  await verifyPageLoaded(this.page, loginPage.getUrl(), loginPage.getEmailField());
 });
 
-When('the user logs in with {string} and {string}', login);
-When('the user logs in with email {string} and password {string}', login);
+When('the user logs in with email {string} and password {string}', async function (this: { page: Page }, email: string, password: string): Promise<void> {
+  const loginPage = new LoginPage(this.page);
+  await loginPage.login(email, password);
+});
+
+Given('the user has logged in with email {string} and password {string}', async function (this: { page: Page }, email: string, password: string): Promise<void> {
+  const loginPage = new LoginPage(this.page);
+  const dashboardPage = new DashboardPage(this.page);
+  await loginPage.navigate();
+  await loginPage.login(email, password);
+  await verifyPageLoaded(this.page, dashboardPage.url, dashboardPage.dashboardTitle);
+});

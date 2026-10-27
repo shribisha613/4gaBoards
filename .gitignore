@@ -4,7 +4,7 @@ test_docker
 
 .idea
 .DS_Store
-tests/.env
+
 # Prevent another lockfile than pnpm-lock.yaml (pnpm) from being created
 yarn.lock
 package-lock.json

@@ -11,7 +11,7 @@ export class SessionPage {
     this.logOutBtn = this.page.getByRole('button', { name: 'Log Out' });
   }
 
-  public async logOut() {
+  public async logOut(): Promise<void> {
     await this.profileBtn.click();
     await this.logOutBtn.click();
   }
