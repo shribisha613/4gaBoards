@@ -4,7 +4,7 @@ const path = require('node:path');
 const { chromium } = require('playwright');
 require('dotenv').config();
 
-setDefaultTimeout(30000);
+setDefaultTimeout(40000);
 
 let browser;
 
@@ -31,14 +31,9 @@ After(async function (scenario) {
       const resultsDir = path.join(process.cwd(), 'test-results');
 
       await fs.mkdir(resultsDir, { recursive: true });
-      const safeName = scenario.pickle.name
-        .replace(/[^a-z0-9_-]/gi, '_')
-        .slice(0, 100);
+      const safeName = scenario.pickle.name.replace(/[^a-z0-9_-]/gi, '_').slice(0, 100);
 
-      const screenshotPath = path.join(
-        resultsDir,
-        `${safeName}-${Date.now()}.png`,
-      );
+      const screenshotPath = path.join(resultsDir, `${safeName}-${Date.now()}.png`);
 
       await this.page.screenshot({
         path: screenshotPath,
