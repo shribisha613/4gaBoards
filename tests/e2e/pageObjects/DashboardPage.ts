@@ -7,6 +7,7 @@ export class DashboardPage {
   public readonly addProjectNameField: Locator;
   public readonly addProjectBtn: Locator;
   public readonly projectTitle: Locator;
+  public readonly addBoardBtn: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -15,6 +16,7 @@ export class DashboardPage {
     this.addProjectNameField = this.page.getByRole("textbox", {name: "Enter project name..."});
     this.addProjectBtn = this.page.getByRole('dialog').getByRole('button', { name: 'Add Project' })
     this.projectTitle = this.page.locator('//div[contains(@class, "Header_title__l+wMf")]');
+    this.addBoardBtn = this.page.getByRole('button', {name: 'Add Board'});
   }
 
   public async getDashboardTitle(): Promise<string | null> {
@@ -28,5 +30,9 @@ export class DashboardPage {
   public async createProject(name: string): Promise<void> {
     await this.addProjectNameField.fill(name);
     await this.addProjectBtn.click();
+  }
+
+  public async creatAddeBoard(name: string, project: string, template: string): Promise<void> {
+    await this.addBoardBtn.click();
   }
 }
