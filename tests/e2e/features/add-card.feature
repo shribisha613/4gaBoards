@@ -6,6 +6,6 @@ Feature: Board and Card Management
   Scenario: Successfully create a board and add a card to it
     Given the user with email "demo" and password "demo" has logged in to the dashboard
     When the user creates a board with following details:
-      | name | project         | template |
-      | demo | Getting started | Kanban   |
-    Then the board should be visible in the dashboard
+      | name       | project         | template |
+      | Johne Doe  | Getting started | kanban   |
+    Then the board "Johne Doe" should be visible in the dashboard
