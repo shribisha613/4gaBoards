@@ -1,9 +1,9 @@
 import { Locator, Page } from '@playwright/test';
 
 export class SessionPage {
-  public readonly page: Page;
-  public readonly logOutBtn: Locator;
-  public readonly profileBtn: Locator;
+  private readonly page: Page;
+  private readonly logOutBtn: Locator;
+  private readonly profileBtn: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -11,7 +11,7 @@ export class SessionPage {
     this.logOutBtn = this.page.getByRole('button', { name: 'Log Out' });
   }
 
-  public async logOut() {
+  public async logOut(): Promise<void> {
     await this.profileBtn.click();
     await this.logOutBtn.click();
   }

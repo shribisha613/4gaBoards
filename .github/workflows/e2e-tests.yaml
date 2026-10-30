@@ -39,7 +39,7 @@ jobs:
       - name: Run e2e tests
         working-directory: tests
         env:
-          HEADLESS: "true"
+          HEADLESS: 'true'
         run: pnpm run test:e2e e2e/features/
 
       - name: Upload test artifacts
