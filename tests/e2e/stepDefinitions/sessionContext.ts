@@ -1,12 +1,11 @@
 import { Given } from '@cucumber/cucumber';
-import { expect } from '@playwright/test';
 import { LoginPage } from '../pageObjects/LoginPage';
 import { SessionPage } from '../pageObjects/SessionPage';
+import { verifyPageLoaded } from '../helpers/pageLoadAssertions';
 
-Given('{string} has logged out', async function (_user: string) {
+Given('the user has logged out', async function (): Promise<void> {
   const sessionPage = new SessionPage(this.page);
   await sessionPage.logOut();
   const loginPage = new LoginPage(this.page);
-  const loginUrl = loginPage.getLoginUrl();
-  await expect(this.page).toHaveURL(loginUrl);
+  await verifyPageLoaded(this.page, loginPage.getUrl(), loginPage.getEmailField());
 });

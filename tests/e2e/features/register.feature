@@ -6,4 +6,4 @@ Feature: User Registration
   Scenario: Register a new user
     Given the user has navigated to the registration page
     When the user registers with email "ram@gmail.com" and password "ram@gmail.com"
-    Then the user should be navigated to the dashboard page
+    Then the user should be navigated to the dashboard
