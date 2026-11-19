@@ -13,10 +13,14 @@ export class DashboardPage {
     this.page = page;
     this.url = `${BASE_URL}/`;
     this.dashboardTitle = this.page.getByText('Dashboard', { exact: true });
-    this.dashboardAddProjectBtn = this.page.locator('//div[contains(@class, "Sidebar_sidebar__x32HG")]//button[contains(@title, "Add Project")]');
+    this.dashboardAddProjectBtn = this.page.getByRole('button', { name: 'Add Project' }).first();
     this.addProjectNameField = this.page.getByRole('textbox', { name: 'Enter project name...' });
     this.addProjectBtn = this.page.getByRole('dialog').getByRole('button', { name: 'Add Project' });
-    this.projectTitle = this.page.locator('//div[contains(@class, "Header_title__l+wMf")]');
+    this.projectTitle = this.page.locator('[class*="Project_title"]');
+  }
+
+  public getDashboardTitle(): Promise<string | null> {
+    return this.dashboardTitle.textContent();
   }
 
   public async openAddProjectPopup(): Promise<void> {
