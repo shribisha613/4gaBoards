@@ -61,6 +61,7 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.28.6",
+    "@playwright/test": "^1.65.1",
     "concurrently": "^9.2.1",
     "confusing-browser-globals": "^1.0.11",
     "eslint": "^9.39.4",
